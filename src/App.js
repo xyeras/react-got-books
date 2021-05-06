@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import BookCard from './components/BookCard'
 import './App.css';
 
 const App = () => {
@@ -35,23 +36,20 @@ const App = () => {
 
   return (
     <div className="container my-5">
+
       <h2 className="display-4 text-center">Game of Thrones Books</h2>
-      <p>You have {books.length} to sell.</p>
+      
       <input
         type="text"
-        className="form-control"
-        id="pokemon-search"
+        className="form-control my-3 "
+        id="book-search"
         placeholder="Search for a book"
         value={searchTerm}
         onChange={handleChange}
       />
-      <div>
-        {books.map( (book, index) => {
-          return (
-            <div key={index}>{book.name}</div>
-          );
-        })}
-      </div>
+
+      <BookCard books={books}/>
+
     </div>
   );
 }
