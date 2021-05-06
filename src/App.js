@@ -6,7 +6,7 @@ const App = () => {
 
   return (
     <div className="container my-5">
-      Game of Thrones
+      <h2 className="display-4 text-center">Game of Thrones Books</h2>
     </div>
   );
 }
