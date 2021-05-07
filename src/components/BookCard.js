@@ -1,8 +1,8 @@
-const BookCard = ( { books } ) => {
+const BookCard = ( { bookPosts } ) => {
 
     return (
         <div className="row">
-            {books.map( (book, index) => {
+            {bookPosts.map( (book, index) => {
                 return (
                     <div className ="card d-flex col-4" key={index}>
                         <div className="card-body">

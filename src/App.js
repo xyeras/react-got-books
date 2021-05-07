@@ -6,26 +6,35 @@ import './App.css';
 const App = () => {
 
   const [books, setBooks] = useState([]);
+  const [bookPosts, setBookPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const fetchData = async () => {
+    const response = await axios.get(
+      "https://www.anapioficeandfire.com/api/books"
+    );
+    console.log(response.data);
+    setBooks(response.data);
+  };
+
+  const getBooks = async () => {
+    const response = await axios.get(
+      "https://www.anapioficeandfire.com/api/books"
+    );
+    console.log(response.data);
+    setBookPosts(response.data);
+    fetchData();
+  }
 
   useEffect(() => {
 
-    const fetchData = async () => {
-      const response = await axios.get(
-        "https://www.anapioficeandfire.com/api/books"
-      );
-      console.log(response.data);
-      setBooks(response.data);
-      searchTerm === '' ? setBooks(response.data) : setBooks(foundBook);
-    };
-
-    fetchData();
-
-    const foundBook = books.filter(b => {
+    const foundBook = bookPosts.filter(b => {
       return (
           b.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     });
+
+    searchTerm === '' ? setBookPosts(books) : setBookPosts(foundBook);
     
   }, [searchTerm]);
 
@@ -48,7 +57,16 @@ const App = () => {
         onChange={handleChange}
       />
 
-      <BookCard books={books}/>
+      <div className="row d-flex justify-content-center">
+        <button
+          className="col-6 justify-content-center btn btn-md btn-primary mb-3"
+          onClick={() => getBooks()}
+        >
+          Click here for the list of books under this series!
+        </button>
+      </div>
+
+      <BookCard bookPosts={bookPosts}/>
 
     </div>
   );
